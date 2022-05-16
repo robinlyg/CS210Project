@@ -1,0 +1,28 @@
+package com.example.cs210project.Model;
+
+import java.io.Serializable;
+
+public class Ingredient extends Food implements Serializable {
+    private String name;
+
+    public Ingredient(String type, String name) {
+        super(type);
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Ingredient{" +
+                "type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
+}
