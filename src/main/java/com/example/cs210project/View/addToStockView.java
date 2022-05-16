@@ -1,10 +1,6 @@
 package com.example.cs210project.View;
 
-import com.cs210.nothingtoeat.controller.Controller;
-import com.cs210.nothingtoeat.model.Ingredient;
-import com.cs210.nothingtoeat.model.Meat;
-import com.cs210.nothingtoeat.model.Produce;
-import com.cs210.nothingtoeat.model.Stock;
+
 import com.example.cs210project.Contoller.Controller;
 import com.example.cs210project.Model.Ingredient;
 import com.example.cs210project.Model.Meat;
@@ -53,7 +49,6 @@ public class addToStockView extends Scene {
     private Button returnButton = new Button("Return to Menu");
 
     private Controller controller = Controller.getInstance();
-    private Stock stock = Stock.getInstance();
 
     public addToStockView() {
         super(new GridPane(), MainScene.WIDTH, MainScene.HEIGHT);
@@ -146,7 +141,7 @@ public class addToStockView extends Scene {
             type = meatCB.getSelectionModel().getSelectedItem();
             Meat m = new Meat(type);
             //check for dupes
-            stock.addToStock(m);
+            controller.getAllInStock().add(m);
         }
         if (!(produceType.isEmpty())) {
             type = produceTypeCB.getSelectionModel().getSelectedItem();
@@ -157,7 +152,7 @@ public class addToStockView extends Scene {
             // produceTypeErr.setVisible(type.isEmpty());
             if (!(type.equals("Select Type"))) {
                 Produce p = new Produce((type));
-                stock.addToStock(p);
+                controller.getAllInStock().add(p);
             }
             //if typeCB was not selected it == null, we want to set a visible error message under the typeCB
             //when the user selects "add" we do not want to clear this field, because it was not added, include in err message
@@ -166,21 +161,21 @@ public class addToStockView extends Scene {
         if (!(dairyTF.getText() == "")) {
             name = dairyTF.getText();
             Ingredient i = new Ingredient("Dairy", name);
-            stock.addToStock(i);
+            controller.getAllInStock().add(i);
         }
         if (!(seasoningTF.getText() == "")) {
             name = seasoningTF.getText();
             Ingredient i = new Ingredient("Seasoning", name);
-            stock.addToStock(i);
+            controller.getAllInStock().add(i);
         }
         if (!(pantryTF.getText() == "")) {
             name = pantryTF.getText();
             Ingredient i = new Ingredient("Pantry", name);
-            stock.addToStock(i);
+            controller.getAllInStock().add(i);
         }
 
         //clear fields
-        Stock.getInstance().saveStock();
+        controller.saveData();
         clearInputs();
     }
 

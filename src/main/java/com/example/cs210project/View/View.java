@@ -1,5 +1,6 @@
 package com.example.cs210project.View;
 
+import com.example.cs210project.Contoller.Controller;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -9,13 +10,16 @@ import java.io.IOException;
 
 public class View extends Application {
     @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(View.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage primaryStage) throws Exception{
+        ViewNavigator.setStage(primaryStage);
+        ViewNavigator.loadScene("Nothing To Eat", new MainScene());
     }
+
+    @Override
+    public void stop() throws Exception {
+        Controller.getInstance().saveData();
+    }
+
 
     public static void main(String[] args) {
         launch();

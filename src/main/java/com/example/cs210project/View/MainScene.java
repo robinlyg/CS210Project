@@ -1,6 +1,5 @@
 package com.example.cs210project.View;
 
-import com.cs210.nothingtoeat.controller.Controller;
 import com.example.cs210project.Contoller.Controller;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
