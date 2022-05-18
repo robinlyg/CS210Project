@@ -8,16 +8,18 @@ import java.util.Objects;
 public class Recipe implements Serializable {
 
     private String name;
-    private Meat meat; //chicken, beef, fish
-    private Produce produce;
+    private MainDish mainIngredient;
+    private SideDish sideIngredient;
+    private ArrayList<Meat> meats; //chicken, beef, fish
+    private ArrayList<Produce> produce;
     private ArrayList<Ingredient> ingredients;
     private ArrayList<String> directions;
     private String preparation; //boiled, grilled, fried, baked
 
-    public Recipe(String name, Meat meat, Produce produce, ArrayList<Ingredient> ingredients,
+    public Recipe(String name, ArrayList<Meat> meats, ArrayList<Produce> produce, ArrayList<Ingredient> ingredients,
                   ArrayList<String> directions, String preparation) {
         this.name = name;
-        this.meat = meat;
+        this.meats = meats;
         this.produce = produce;
         this.ingredients = ingredients;
         this.directions = directions;
@@ -26,8 +28,8 @@ public class Recipe implements Serializable {
 
     public Recipe(){
         this.name = "name";
-        this.meat = new Meat("meat");
-        this.produce = new Produce("produce");
+        this.meats = new ArrayList<>();
+        this.produce = new ArrayList<>();
         this.ingredients = null;
         this.directions = null;
         this.preparation = "";
@@ -41,19 +43,19 @@ public class Recipe implements Serializable {
         this.name = name;
     }
 
-    public Meat getMeat() {
-        return meat;
+    public ArrayList<Meat> getMeat() {
+        return meats;
     }
 
-    public void setMeat(Meat meat) {
-        this.meat = meat;
+    public void setMeat(ArrayList<Meat> meats) {
+        this.meats = meats;
     }
 
-    public Produce getProduce() {
+    public ArrayList<Produce> getProduce() {
         return produce;
     }
 
-    public void setProduce(Produce produce) {
+    public void setProduce(ArrayList<Produce> produce) {
         this.produce = produce;
     }
 
@@ -86,14 +88,12 @@ public class Recipe implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Recipe)) return false;
         Recipe recipe = (Recipe) o;
-        return Objects.equals(name, recipe.name) && Objects.equals(meat, recipe.meat)
-                && Objects.equals(produce, recipe.produce) && Objects.equals(ingredients, recipe.ingredients)
-                && Objects.equals(directions, recipe.directions) && Objects.equals(preparation, recipe.preparation);
+        return name.equals(recipe.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, meat, produce, ingredients, directions, preparation);
+        return Objects.hash(name);
     }
 
     @Override
