@@ -41,6 +41,7 @@ public class Controller {
     {
         return mStock;
     }
+    public ObservableList<Recipe> getAllRecipes(){return mAllRecipes;}
 
 
 }
