@@ -82,15 +82,6 @@ public class addToStockView extends Scene {
         produceHB.getChildren().add(produceTypeCB);
         addToStockVB.getChildren().add(produceHB);
 
-//        HBox errHB = new HBox();
-//        errHB.getChildren().add(produceTypeRequiredErr);
-//        errHB.getChildren().add(produceTypeErr);
-//        produceTypeErr.setTextFill(Color.RED);
-//        produceTypeErr.setVisible(false);
-//        produceTypeRequiredErr.setTextFill(Color.RED);
-//        produceTypeRequiredErr.setVisible(false);
-//        addToStockVB.getChildren().add(errHB);
-
         HBox dairyHB = new HBox();
         dairyHB.setSpacing(74);
         dairyLabel.setFont(new Font("Arial", FONT_SIZE));
@@ -112,26 +103,21 @@ public class addToStockView extends Scene {
         pantryHB.getChildren().add(pantryTF);
         addToStockVB.getChildren().add(pantryHB);
 
-
         HBox buttonHB = new HBox();
         buttonHB.setSpacing(280);
         buttonHB.getChildren().add(addButton);
         buttonHB.getChildren().add(returnButton);
         addToStockVB.getChildren().add(buttonHB);
 
-
-        // addToStockVB.getChildren().add(addButton);
         addButton.setOnAction(event -> add());
         returnButton.setOnAction(event -> returnToMenu());
 
         pane.add(addToStockVB, 1, 1);
 
-
         this.setRoot(pane);
     }
 
     //thinking user should be able to add from each field at once, or separately
-    //TODO the "add" button needs to call this event
     private void add() {
         // produceTypeErr.setVisible(false);
         //produceTypeRequiredErr.setVisible(false);
@@ -145,18 +131,11 @@ public class addToStockView extends Scene {
         }
         if (!(produceType.isEmpty())) {
             type = produceTypeCB.getSelectionModel().getSelectedItem();
-            //  if(type == null)
-            //  produceTypeErr.setVisible(true);
-            //produceTypeRequiredErr.setVisible(true);
-            //if not null runs this code, get an error because Type is null so need to check for this
-            // produceTypeErr.setVisible(type.isEmpty());
+
             if (!(type.equals("Select Type"))) {
                 Produce p = new Produce((type));
                 controller.getAllInStock().add(p);
             }
-            //if typeCB was not selected it == null, we want to set a visible error message under the typeCB
-            //when the user selects "add" we do not want to clear this field, because it was not added, include in err message
-
         }
         if (!(dairyTF.getText() == "")) {
             name = dairyTF.getText();
@@ -179,7 +158,6 @@ public class addToStockView extends Scene {
         clearInputs();
     }
 
-
     private void clearInputs() {
 
         produceTF.clear();
@@ -191,10 +169,8 @@ public class addToStockView extends Scene {
         meatCB.getSelectionModel().selectFirst();
     }
 
-
     private void returnToMenu() {
         ViewNavigator.loadScene("Nothing To Eat", new MainScene());
-
 
     }
 }//class

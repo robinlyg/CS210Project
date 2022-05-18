@@ -6,7 +6,7 @@ import javafx.collections.ObservableList;
 import java.io.*;
 
 public class Model {
-    //FILE_NAMES as public static final
+
     private static final File RECIPE_FILE = new File("RecipeList.dat");
     private static final File MEAT_FILE = new File("MeatList.dat");
     private static final File PRODUCE_FILE = new File("ProduceList.dat");
@@ -15,11 +15,9 @@ public class Model {
 
     protected static ObservableList<Food> inStock = FXCollections.observableArrayList();
 
-    //bool fileHasData
     public static boolean fileHasData(File file) {
         return file.exists() && file.length() > 1;
     }
-
 
     public static ObservableList<Food> populateStock() {
 
@@ -94,8 +92,6 @@ public class Model {
         }
         return false;
     }
-
-
 
 
     public static boolean writeToRecipe(ObservableList<Recipe> allRecipeList)
