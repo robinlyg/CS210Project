@@ -15,15 +15,21 @@ public class AddRecipeScene extends Scene {
     //properties
     private TextField recipeTitleTF = new TextField();
     private TextArea ingredientTA = new TextArea();
+
     private Button addButton = new Button("Add Recipe");
     private Button removeButton = new Button("Remove Recipe");
     private Button returnButton = new Button("Return");
+
     private Label titleLabel = new Label("Recipe Title");
     private Label ingredientLabel = new Label("List Ingredients");
     private Label recipeLabel = new Label("Recipes");
+
     private Controller controller = Controller.getInstance();
     private ObservableList<Recipe> recipeList;
+
     private ListView<Recipe> recipeLV = new ListView<>();
+
+    private ComboBox<String> prepCB = new ComboBox<>();
     //TODO, not sure if we'll need or want
     //private TextArea processTA = new TextArea();
 
@@ -72,11 +78,17 @@ public class AddRecipeScene extends Scene {
 
         pane.add(recipeVB,0,1);
 
-
+        pane.add(prepCB, 0, 0);
+        prepCB.getItems().addAll("Baked", "Grilled", "Fried", "Boiled");
+        prepCB.getSelectionModel().selectedItemProperty().addListener(((observableValue, s, newValue) -> selectedPrepType(newValue)));
 
 
         this.setRoot(pane);
 
+    }
+
+    private void selectedPrepType(String newValue) {
+        //TODO : what to do with prep type
     }
 
     private void returnToMain() {
