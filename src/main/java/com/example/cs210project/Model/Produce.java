@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Produce extends Food implements Serializable {
+    protected String name;
 
-
-    public Produce(String type) {
-        super(type);
+    public Produce(String type, String name) {
+        super(type); this.name = name;
     }
 
 

@@ -13,11 +13,12 @@ public class Recipe implements Serializable {
     private ArrayList<Meat> meats; //chicken, beef, fish
     private ArrayList<Produce> produce;
     private ArrayList<Ingredient> ingredients;
-    private ArrayList<String> directions;
+    //private ArrayList<String> directions;
+    String directions;
     private String preparation; //boiled, grilled, fried, baked
 
     public Recipe(String name, ArrayList<Meat> meats, ArrayList<Produce> produce, ArrayList<Ingredient> ingredients,
-                  ArrayList<String> directions, String preparation) {
+                  String directions, String preparation) {
         this.name = name;
         this.meats = meats;
         this.produce = produce;
@@ -67,11 +68,11 @@ public class Recipe implements Serializable {
         this.ingredients = ingredients;
     }
 
-    public ArrayList<String> getDirections() {
+    public String getDirections() {
         return directions;
     }
 
-    public void setDirections(ArrayList<String> directions) {
+    public void setDirections(String directions) {
         this.directions = directions;
     }
 

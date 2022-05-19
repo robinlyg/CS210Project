@@ -133,7 +133,7 @@ public class addToStockView extends Scene {
             type = produceTypeCB.getSelectionModel().getSelectedItem();
 
             if (!(type.equals("Select Type"))) {
-                Produce p = new Produce((type));
+                Produce p = new Produce(type, produceTF.getText());
                 controller.getAllInStock().add(p);
             }
         }
