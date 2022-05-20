@@ -8,21 +8,56 @@ import java.util.Objects;
 public class Recipe implements Serializable {
 
     private String name;
-    private MainDish mainIngredient;
-    private SideDish sideIngredient;
+
+    public MainDish getMainIngredient() {
+        return mainIngredient;
+    }
+
+    public void setMainIngredient(MainDish mainIngredient) {
+        this.mainIngredient = mainIngredient;
+    }
+
+    public SideDish getSideIngredient() {
+        return sideIngredient;
+    }
+
+    public void setSideIngredient(SideDish sideIngredient) {
+        this.sideIngredient = sideIngredient;
+    }
+
+    public ArrayList<Meat> getMeats() {
+        return meats;
+    }
+
+    public void setMeats(ArrayList<Meat> meats) {
+        this.meats = meats;
+    }
+
+    private MainDish mainIngredient = null;    //meat
+    private SideDish sideIngredient = null;    //produce
     private ArrayList<Meat> meats; //chicken, beef, fish
-    private ArrayList<Produce> produce;
+    private ArrayList<Produce> produce; //vegetable, fruit, herb, starch
     private ArrayList<Ingredient> ingredients;
     //private ArrayList<String> directions;
-    String directions;
+    private String directions;
     private String preparation; //boiled, grilled, fried, baked
 
-    public Recipe(String name, ArrayList<Meat> meats, ArrayList<Produce> produce, ArrayList<Ingredient> ingredients,
+    public Recipe(MainDish mainIngredient, String name, ArrayList<Meat> meats, ArrayList<Produce> produce,
                   String directions, String preparation) {
+        this.mainIngredient = mainIngredient;
         this.name = name;
         this.meats = meats;
         this.produce = produce;
-        this.ingredients = ingredients;
+        this.directions = directions;
+        this.preparation = preparation;
+    }
+
+    public Recipe(SideDish sideIngredient, String name, ArrayList<Meat> meats, ArrayList<Produce> produce,
+                  String directions, String preparation) {
+        this.sideIngredient = sideIngredient;
+        this.name = name;
+        this.meats = meats;
+        this.produce = produce;
         this.directions = directions;
         this.preparation = preparation;
     }
@@ -60,13 +95,6 @@ public class Recipe implements Serializable {
         this.produce = produce;
     }
 
-    public ArrayList<Ingredient> getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(ArrayList<Ingredient> ingredients) {
-        this.ingredients = ingredients;
-    }
 
     public String getDirections() {
         return directions;
@@ -84,6 +112,32 @@ public class Recipe implements Serializable {
         this.preparation = preparation;
     }
 
+    public String show() {
+        String output = name + "\n\n";
+        output += "List of Ingredients Needed:\n";
+
+        if (mainIngredient != null) {
+            output += mainIngredient.getMeat().getType() + "\n";
+            ingredients = mainIngredient.getIngredients();
+        } else {
+            output += sideIngredient.getMainIngredient().name + "\n";
+            ingredients = sideIngredient.getIngredients();
+        }
+        for (Meat meat: meats) {
+            output += meat.getType() + "\n";
+        }
+        for (Produce prod: produce) {
+            output += prod.name + "\n";
+        }
+        for (Ingredient ingred: ingredients) {
+            output += ingred.getName() + "\n";
+        }
+
+        System.out.println("\n");
+
+        return output + directions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -99,7 +153,7 @@ public class Recipe implements Serializable {
 
     @Override
     public String toString() {
-        return "Recipe";
+        return name;
     }
 }
 

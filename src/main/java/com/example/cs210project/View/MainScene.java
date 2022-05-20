@@ -18,8 +18,8 @@ public class MainScene extends Scene {
     private Label title = new Label("\tNothing to Eat!");
     private Button addToStockButton = new Button("Add to Stock");
     private Button removeFromStockButton = new Button("View/Manage Stock");
-    private Button generateFromStockButton = new Button("Generate from Stock");
-    private Button generateShoppingListButton = new Button("Generate Shopping List");
+    private Button generateRecipeButton = new Button("Generate a Recipe");
+    private Button generateShoppingListButton = new Button("Generate a Shopping List");
     private Button addRecipeButton = new Button("Add Recipe");
 
 
@@ -46,9 +46,9 @@ public class MainScene extends Scene {
         removeFromStockButton.setPrefHeight(BUTTON_HEIGHT);
         removeFromStockButton.setStyle("-fx-background-color: #f6ccca; -fx-border-color: BLACK");
 
-        generateFromStockButton.setPrefWidth(BUTTON_WIDTH);
-        generateFromStockButton.setPrefHeight(BUTTON_HEIGHT);
-        generateFromStockButton.setStyle("-fx-background-color: #d8e6fa; -fx-border-color: BLACK");
+        generateRecipeButton.setPrefWidth(BUTTON_WIDTH);
+        generateRecipeButton.setPrefHeight(BUTTON_HEIGHT);
+        generateRecipeButton.setStyle("-fx-background-color: #d8e6fa; -fx-border-color: BLACK");
 
         generateShoppingListButton.setPrefWidth(BUTTON_WIDTH);
         generateShoppingListButton.setPrefHeight(BUTTON_HEIGHT);
@@ -63,7 +63,7 @@ public class MainScene extends Scene {
         mainButtonSelectionHB.getChildren().add(title);
         mainButtonSelectionHB.getChildren().add(addToStockButton);
         mainButtonSelectionHB.getChildren().add(removeFromStockButton);
-        mainButtonSelectionHB.getChildren().add(generateFromStockButton);
+        mainButtonSelectionHB.getChildren().add(generateRecipeButton);
         mainButtonSelectionHB.getChildren().add(generateShoppingListButton);
         mainButtonSelectionHB.getChildren().add(addRecipeButton);
 
@@ -72,6 +72,8 @@ public class MainScene extends Scene {
         addToStockButton.setOnAction(event->addToStock());
         removeFromStockButton.setOnAction(event-> removeScene());
         addRecipeButton.setOnAction(event -> addRecipe());
+        generateRecipeButton.setOnAction(event -> generateRecipe());
+
 
         this.setRoot(pane);
     }
@@ -88,4 +90,5 @@ public class MainScene extends Scene {
     {
         ViewNavigator.loadScene("Remove From Stock", new removeScene());
     }
+    private void generateRecipe() { ViewNavigator.loadScene("Generate Recipe", new generateRecipeScene());}
 }

@@ -4,12 +4,20 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Produce extends Food implements Serializable {
+
     protected String name;
 
     public Produce(String type, String name) {
         super(type); this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {

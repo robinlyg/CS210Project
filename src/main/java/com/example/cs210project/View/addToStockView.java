@@ -25,19 +25,21 @@ public class addToStockView extends Scene {
     ComboBox<String> meatCB = new ComboBox(meatOptions);
 
     //TODO List for produce type for produceType CB
-    ObservableList<String> produceType = FXCollections.observableArrayList("Select Type", "Fruit", "Vegetable", "herbs");
+    ObservableList<String> produceType = FXCollections.observableArrayList("Select Type", "Fruit", "Vegetable", "Herbs");
     //TODO - "Type" should be the default
     private ComboBox<String> produceTypeCB = new ComboBox<>(produceType);
     private TextField produceTF = new TextField();
     private TextField dairyTF = new TextField();
     private TextField seasoningTF = new TextField();
     private TextField pantryTF = new TextField();
+    private TextField sauceTF = new TextField();
     private Label meatLabel = new Label("Meat");
     private Label produceLabel = new Label("Produce");
     private Label dairyLabel = new Label("Dairy");
     private Label seasonLabel = new Label("Seasoning");
     private Label pantryLabel = new Label("Pantry");
-    private Label produceTypeErr = new Label(" this item has not been added");
+    private Label sauceLabel = new Label("Sauce");
+    private Label produceTypeErr = new Label(" This item has not been added");
     private Label produceTypeRequiredErr = new Label("Type is required,");
 
     private Produce selectedProduce;
@@ -103,6 +105,13 @@ public class addToStockView extends Scene {
         pantryHB.getChildren().add(pantryTF);
         addToStockVB.getChildren().add(pantryHB);
 
+        HBox sauceHB = new HBox();
+        sauceHB.setSpacing(63);
+        sauceLabel.setFont(new Font("Arial", FONT_SIZE));
+        sauceHB.getChildren().add(sauceLabel);
+        sauceHB.getChildren().add(sauceTF);
+        addToStockVB.getChildren().add(sauceHB);
+
         HBox buttonHB = new HBox();
         buttonHB.setSpacing(280);
         buttonHB.getChildren().add(addButton);
@@ -150,6 +159,11 @@ public class addToStockView extends Scene {
         if (!(pantryTF.getText() == "")) {
             name = pantryTF.getText();
             Ingredient i = new Ingredient("Pantry", name);
+            controller.getAllInStock().add(i);
+        }
+        if (!(sauceTF.getText() == "")) {
+            name = sauceTF.getText();
+            Ingredient i = new Ingredient("Sauce", name);
             controller.getAllInStock().add(i);
         }
 

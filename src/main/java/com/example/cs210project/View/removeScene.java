@@ -15,11 +15,12 @@ import javafx.scene.layout.*;
 public class removeScene extends Scene {
 
     Controller controller = Controller.getInstance();
+    private Label titleLabel = new Label("Stock");
     private ObservableList<Food> stockList;
     private ListView<Food> mStockListView = new ListView<>();
     private Food selectedFood;
-    Button removeButton = new Button("Remove");
-    Button returnButton = new Button("Return");
+    private Button removeButton = new Button("Remove");
+    private Button returnButton = new Button("Return");
 
     public removeScene() {
 
@@ -36,8 +37,10 @@ public class removeScene extends Scene {
 
         VBox removeVB = new VBox();
         removeVB.setSpacing(15);
+        removeVB.getChildren().add(titleLabel);
 
-        mStockListView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> updateSelectedFood(newValue));
+        mStockListView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue,
+                                                                               newValue) -> updateSelectedFood(newValue));
         mStockListView.setPrefWidth(MainScene.WIDTH);
         stockList = controller.getAllInStock();
         mStockListView.setItems(stockList);

@@ -7,7 +7,7 @@ public class MainDish extends Dish {
 
     private Meat meat; //chicken, beef, fish
 
-    MainDish(String name, ArrayList<Ingredient> ingredients, Meat meatType){
+    public MainDish(String name, ArrayList<Ingredient> ingredients, Meat meatType){
         super(name, ingredients);
         this.meat = meatType;
     }

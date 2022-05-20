@@ -1,10 +1,7 @@
 package com.example.cs210project.View;
 
 import com.example.cs210project.Contoller.Controller;
-import com.example.cs210project.Model.Ingredient;
-import com.example.cs210project.Model.Meat;
-import com.example.cs210project.Model.Produce;
-import com.example.cs210project.Model.Recipe;
+import com.example.cs210project.Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
@@ -21,6 +18,7 @@ public class AddRecipeScene extends Scene {
     private TextArea directionsTA = new TextArea();
     private TextField produceTF = new TextField();
     private TextField ingredientTF = new TextField();
+    private TextField sideIngredientTF = new TextField();
 
     private Button addButton = new Button("Add Recipe");
     private Button removeButton = new Button("Remove Recipe");
@@ -46,6 +44,7 @@ public class AddRecipeScene extends Scene {
     private ArrayList<Meat> mMeatArrayList = new ArrayList<>();
     private ArrayList<Produce> mProduceArrayList = new ArrayList<>();
     private ArrayList<Ingredient> mIngredientArrayList = new ArrayList<>();
+    private boolean mainDish;
     //TODO, not sure if we'll need or want
     //private TextArea processTA = new TextArea();
 
@@ -68,7 +67,7 @@ public class AddRecipeScene extends Scene {
         VBox recipeVB = new VBox();
         recipeVB.setSpacing(15);
 
-        //recipie title and text field
+        //recipe title and text field
         HBox recipeTitleHB = new HBox();
         recipeTitleHB.setSpacing(15);
         recipeTitleHB.setPrefWidth(120);
@@ -99,6 +98,8 @@ public class AddRecipeScene extends Scene {
         mainIngredientHB.setSpacing(15);
         mainIngredientHB.getChildren().add(new Label("Main Ingredient"));
         mainIngredientHB.getChildren().add(mainIngredCB);
+        mainIngredientHB.getChildren().add(sideIngredientTF);
+        sideIngredientTF.setVisible(false);
      //   mainIngredCB.getItems().addAll("Select", "Poultry", "Beef", "Pork", "Fish");
         recipeVB.getChildren().add(mainIngredientHB);
         //depending on the selection here what we display is effected
@@ -113,19 +114,19 @@ public class AddRecipeScene extends Scene {
         meatHB.getChildren().add(addMeatButton);
         recipeVB.getChildren().add(meatHB);
 
-        //produce lable and combobox and textField
+        //produce label and combobox and textField
         HBox produceHB = new HBox();
         produceHB.setSpacing(35);
         produceHB.getChildren().add(new Label("Produce"));
         produceHB.getChildren().add(produceTF);
         produceHB.getChildren().add(new Label("Type:"));
         produceHB.getChildren().add(produceCB);
-        produceCB.getItems().addAll("Select", "Vegetable", "Fruit", "Herb");
+        produceCB.getItems().addAll("Select", "Vegetable", "Fruit", "Herb", "Starch");
         addProduceButton.setOnAction(event -> addProduce());
         produceHB.getChildren().add(addProduceButton);
         recipeVB.getChildren().add(produceHB);
 
-        //ingredient label, textfield and combo box
+        //ingredient label, textField and combo box
         HBox ingredientHB = new HBox();
         ingredientHB.setSpacing(26);
         ingredientHB.getChildren().add(new Label("Ingredient"));
@@ -192,18 +193,22 @@ public class AddRecipeScene extends Scene {
     }
 
     private void dishDisplay(String newValue) {
-        ObservableList<String> mainIndgredients = FXCollections.observableArrayList();
+        ObservableList<String> mainIngredients = FXCollections.observableArrayList();
 
         switch(dishCB.getSelectionModel().getSelectedItem())
         {
             case "Main Dish":
-                mainIndgredients = FXCollections.observableArrayList("Select", "Poultry", "Beef", "Pork", "Fish");
+                mainDish = true;
+                mainIngredients = FXCollections.observableArrayList("Select", "Poultry", "Beef", "Pork", "Fish");
                 break;
             case "Side Dish":
-                mainIndgredients = FXCollections.observableArrayList("Select", "Vegetable", "Fruit");
+                mainDish = false;
+                sideIngredientTF.setVisible(true);
+                mainIngredients = FXCollections.observableArrayList("Select", "Vegetable", "Fruit", "Starch");
+                break;
         }
 
-        mainIngredCB.setItems(mainIndgredients);
+        mainIngredCB.setItems(mainIngredients);
     }
 
 
@@ -220,9 +225,17 @@ public class AddRecipeScene extends Scene {
         title = recipeTitleTF.getText();
         direction = directionsTA.getText();
         prep = prepCB.getSelectionModel().getSelectedItem();
-
-       recipeList.add(new Recipe(title, mMeatArrayList, mProduceArrayList, mIngredientArrayList, direction, prep ));
-
+        if (mainDish){
+            MainDish dish = new MainDish(title, mIngredientArrayList,
+                    new Meat(mainIngredCB.getSelectionModel().getSelectedItem()));
+            recipeList.add(new Recipe(dish, title, mMeatArrayList, mProduceArrayList,
+                    direction, prep ));
+        } else {
+            SideDish dish = new SideDish(title, mIngredientArrayList,
+                    new Produce(mainIngredCB.getSelectionModel().getSelectedItem(), sideIngredientTF.getText()));
+            recipeList.add(new Recipe(dish, title, mMeatArrayList, mProduceArrayList,
+                    direction, prep ));
+        }
         updateDisplay();
     }
 

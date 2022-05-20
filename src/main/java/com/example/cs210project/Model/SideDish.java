@@ -6,7 +6,7 @@ public class SideDish extends Dish{
 
     private Produce mainIngredient;
 
-    SideDish(String name, ArrayList<Ingredient> ingredients, Produce mainIngredient){
+    public SideDish(String name, ArrayList<Ingredient> ingredients, Produce mainIngredient){
         super(name, ingredients);
         this.mainIngredient = mainIngredient;
     }
