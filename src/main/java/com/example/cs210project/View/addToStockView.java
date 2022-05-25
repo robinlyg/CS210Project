@@ -14,6 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 
+import java.util.Locale;
+
 
 public class addToStockView extends Scene {
 
@@ -136,7 +138,7 @@ public class addToStockView extends Scene {
             type = meatCB.getSelectionModel().getSelectedItem();
             Meat m = new Meat(type);
             //check for dupes
-            controller.getAllInStock().add(m);
+                 controller.getAllInStock().add(m);
         }
         if (!(produceType.isEmpty())) {
             type = produceTypeCB.getSelectionModel().getSelectedItem();

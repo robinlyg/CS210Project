@@ -6,7 +6,7 @@ public class Meat extends Food implements Serializable {
 
 
     public Meat(String type) {
-        super(type);
+        super(type, type);
     }
 
 

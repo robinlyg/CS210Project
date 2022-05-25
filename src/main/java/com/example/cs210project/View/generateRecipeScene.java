@@ -48,8 +48,6 @@ public class generateRecipeScene extends Scene {
         pane.getColumnConstraints().add(colC);
         pane.setAlignment(Pos.CENTER);
 
-
-
         VBox generateRecVB = new VBox();
         generateRecVB.setSpacing(15);
 
@@ -118,7 +116,7 @@ public class generateRecipeScene extends Scene {
             case "Side Dish":
                 isMainDish = false;
                 produceTF.setVisible(true);
-                mainIngredients = FXCollections.observableArrayList("Select", "Vegetable", "Fruit", "Root");
+                mainIngredients = FXCollections.observableArrayList("Select", "Vegetable", "Root");
                 break;
         }
 
@@ -245,22 +243,26 @@ public class generateRecipeScene extends Scene {
         if (mainProduce != null) {
             switch (mainProduce.getType()) {
                 case "Vegetable" -> {
-                    baked = "Placeholder";
-                    fried = "Placeholder";
-                    boiled = "Placeholder";
-                    grilled = "Placeholder";
-                }
-                case "Fruit" -> {
-                    baked = "Placeholder";
-                    fried = "Placeholder";
-                    boiled = "Placeholder";
-                    grilled = "Placeholder";
+                    temp = 350;
+                    baked = "Take " + mainProduce.getName() + " and cut to desired size while preheating the oven to" + temp + "degrees.\n If crisp edges desired bring up to 400 degrees.\n" +
+                            "Toss in a 1 tbs of olive oil. Cook until fork tender.\n";
+                    fried = "Cut " + mainProduce.getName() + " to desired size, heat a pan with a tbs of olive oil on medium heat.\nAdd"
+                            + mainProduce.getName() + " to pan cook for 15 minutes stirring frequently.";//sear
+                    boiled = "Cut " + mainProduce.getName() + " to desired size, and bring 8 cups of salted water to a boil.\nAdd "
+                             +mainProduce.getName() + " to the water and boil for 7- 8 minutes or until tender.";
+                    grilled = "Take " + mainProduce.getName() + " and cut to desired size. Bring grill up to " + temp + " degrees.\nIf crisp edges desired bring up to 400 degrees.\n"
+                            + "Toss in a 1 tbs of olive oil. Cook until fork tender.\n";
                 }
                 case "Root" -> {
-                    baked = "Placeholder";
-                    fried = "Placeholder";
-                    boiled = "Placeholder";
-                    grilled = "Placeholder";
+                    temp = 400;
+                    baked = "Take " + mainProduce.getName() + " and cut to desired size while preheating the oven to" + temp  + "degrees.\n"+
+                                           "Toss in a 1tbs of olive oil Cook until fork tender.\n";
+                    fried = "Heat enough oil to completely submerge poultry to 375 degrees F.\n" +
+                            "Fry each piece for about 5 - 6 minutes or until fork tender and golden brown\n";
+                    boiled = "Start with cold, generously salted water, cut " + mainProduce.getName() + " into quarters.\n" +
+                            " Add to the cold water, bring to a boil and let boil for 30-40 minutes or till fork tender.\n";
+                    grilled = "Take " + mainProduce.getName() + "and cut to desired size while preheating the oven to " + temp + "degrees.\n" +
+                    "toss in a 1tbs of olive oil. Cook until fork tender.";
                 }
                 default -> {
                     mainIngredientErrLabel.setVisible(true);
@@ -296,9 +298,10 @@ public class generateRecipeScene extends Scene {
                     mainDish.getIngredients().get(1).getName() + ", and " + mainDish.getIngredients().get(2).getName() +
                     ".\nThen take " + mainDish.getIngredients().get(4).getName() + " and place in a pot of boiling water.\n" +
                     "Bring down heat and simmer for 15 to 20 min to preferred softness.\n" +
-                    "If desired, add some " + mainDish.getIngredients().get(5).getName() + " before or after cooking.\n";
+                    " If desired, add some " + mainDish.getIngredients().get(5).getName() + " before or after cooking.\n";
             dairyItem = mainDish.getIngredients().get(3).getName();
             pantryItem = mainDish.getIngredients().get(4).getName();
+            directions += "Place on a bed of " + pantryItem + " with some fresh " + dairyItem + " added to the top.\nEnjoy!";
         } else {
             assert mainProduce != null;
             name = prep + " " + mainProduce.getName();
@@ -307,23 +310,22 @@ public class generateRecipeScene extends Scene {
                 dishIngredients.add(getRandomSeasoning(seasonings));
             }
             //get 1 dairy
-            dishIngredients.add(getRandomSeasoning(dairy));
+            //dishIngredients.add(getRandomSeasoning(dairy));
             //get 1 pantry
             dishIngredients.add(getRandomSeasoning(pantry));
             //get 1 sauce
-            dishIngredients.add(getRandomSeasoning(sauces));
+            //dishIngredients.add(getRandomSeasoning(sauces));
             sideDish = new SideDish(name, dishIngredients, mainProduce);
             newRecipe.setSideIngredient(sideDish);  //add to recipe
 
             //start assembling directions
             //mix ingredients except dairy
+
             directions = "Season " + mainProduce.getName() + " with " + sideDish.getIngredients().get(0).getName() + ", " +
-                    sideDish.getIngredients().get(1).getName() + ", and " + sideDish.getIngredients().get(2).getName() +
-                    ".\nThen take " + sideDish.getIngredients().get(4).getName() + " and place in a pot of boiling water.\n" +
-                    "Bring down heat and simmer for 15 to 20 min to preferred softness.\n" +
-                    "If desired, add some " + sideDish.getIngredients().get(5).getName() + " before or after cooking.\n";
-            dairyItem = sideDish.getIngredients().get(3).getName();
-            pantryItem = sideDish.getIngredients().get(4).getName();
+                    sideDish.getIngredients().get(1).getName() + ", and " + sideDish.getIngredients().get(2).getName();
+                   /* "If desired, add some " + sideDish.getIngredients().get(5).getName() + " before or after cooking.\n";*/
+           // dairyItem = sideDish.getIngredients().get(3).getName();
+            //pantryItem = sideDish.getIngredients().get(4).getName();
         }
 
         //set recipe name
@@ -336,7 +338,7 @@ public class generateRecipeScene extends Scene {
             case "Grilled" -> directions += grilled;
         }
 
-        directions += "Place on a bed of " + pantryItem + " with some fresh " + dairyItem + " added to the top.\nEnjoy!";
+
 
         newRecipe.setDirections(directions);
         recipeList.add(newRecipe);
@@ -371,7 +373,7 @@ public class generateRecipeScene extends Scene {
     private ArrayList<Ingredient> getRandomSeasoningList() {
         ArrayList<Ingredient> seasoningList = new ArrayList<>();
         String seasonings = "Salt,Pepper,Old Bay,Italian Seasoning,Rosemary,Thyme,Oregano,Tarragon,Red Pepper," +
-                "Sugar,Montreal Steak,Kansas City,Chicago,Seasoned Salt,Cayenne Pepper,Cinnamon,Flour,Almond Flour," +
+                "Montreal Steak,Kansas City Seasoning,Chicago Seasoning,Seasoned Salt,Cayenne Pepper," +
                 "Fried Onions, Bread Crumbs,Onion Powder,Garlic Powder";
         ArrayList<String> seasoningNames = new ArrayList<>(List.of(seasonings.split(",")));
 
@@ -400,7 +402,7 @@ public class generateRecipeScene extends Scene {
 
     private ArrayList<Ingredient> getRandomPantryList() {
         ArrayList<Ingredient> pantry = new ArrayList<>();
-        String pantryItems = "Rice,Spaghetti,Ziti,Macaroni,Pasta Shells,Linguine,Rotini";
+        String pantryItems = "Rice,Pasta";
         ArrayList<String> itemNames = new ArrayList<>(List.of(pantryItems.split(",")));
 
         for (String name : itemNames) {
@@ -427,8 +429,8 @@ public class generateRecipeScene extends Scene {
 
     private ArrayList<Ingredient> getRandomSauceList() {
         ArrayList<Ingredient> sauceList = new ArrayList<>();
-        String sauces = "Vinegar,Olive Oil,Soy Sauce,BBQ Sauce,Ketchup,Mustard,Mayonnaise,Ranch,Italian Dressing," +
-                "Water,Orange Juice,Hot Sauce";
+        String sauces = "Vinegar,Olive Oil,Soy Sauce,Ranch,Italian Dressing, Balsamic Vinegar" +
+                ",Hot Sauce";
         ArrayList<String> sauceNames = new ArrayList<>(List.of(sauces.split(",")));
 
         for (String name : sauceNames) {
@@ -456,8 +458,8 @@ public class generateRecipeScene extends Scene {
 
     private ArrayList<Ingredient> getRandomDairyList() {
         ArrayList<Ingredient> dairyList = new ArrayList<>();
-        String dairy = "Cheddar Cheese,Provolone Cheese,Parmesan Cheese,Cotijan Cheese,American Cheese,Swiss Cheese," +
-                "Egg,Mexican Cheese,Pizza Blend Cheese,Cottage Cheese,Sour Cream,Milk,Heavy Cream";
+        String dairy = "Cheddar Cheese,Provolone Cheese,Parmesan Cheese,Cotija Cheese,American Cheese,Swiss Cheese," +
+                "Mexican Cheese,Pizza Blend Cheese,Cottage Cheese,Sour Cream";
         ArrayList<String> dairyNames = new ArrayList<>(List.of(dairy.split(",")));
 
         for (String name : dairyNames) {

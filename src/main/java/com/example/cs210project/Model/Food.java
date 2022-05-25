@@ -1,19 +1,23 @@
 package com.example.cs210project.Model;
 
+import javafx.collections.ObservableList;
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class Food implements Serializable {
     protected String type;
+    protected String name;
 
-    protected Food(String type) {
+    protected Food(String type, String name) {
         this.type = type;
+        this.name = name;
     }
 
     public String getType() {
         return type;
     }
-
+    public String getName(){return name;}
     public void setType(String type) {
         this.type = type;
     }
@@ -30,4 +34,15 @@ public abstract class Food implements Serializable {
     public int hashCode() {
         return Objects.hash(type);
     }
+
+    public boolean contains(ObservableList<Food> foodList){
+        for (Food f: foodList) {
+            if(this.equals(f))
+                return true;
+
+        }
+        return false;
+    }
+
+
 }

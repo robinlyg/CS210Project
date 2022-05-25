@@ -5,18 +5,12 @@ import java.util.Objects;
 
 public class Produce extends Food implements Serializable {
 
-    protected String name;
+
 
     public Produce(String type, String name) {
-        super(type); this.name = name;
-    }
+        super(type, name);
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override
@@ -30,7 +24,7 @@ public class Produce extends Food implements Serializable {
     @Override
     public String toString() {
         return "Produce{" +
-                "type='" + type + '\'' +
+                "type='" + type + '\'' + "Name= " + name +
                 '}';
     }
 }

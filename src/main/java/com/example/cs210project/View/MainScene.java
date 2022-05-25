@@ -19,7 +19,6 @@ public class MainScene extends Scene {
     private Button addToStockButton = new Button("Add to Stock");
     private Button removeFromStockButton = new Button("View/Manage Stock");
     private Button generateRecipeButton = new Button("Generate a Recipe");
-    private Button generateShoppingListButton = new Button("Generate a Shopping List");
     private Button addRecipeButton = new Button("Add Recipe");
 
 
@@ -50,10 +49,6 @@ public class MainScene extends Scene {
         generateRecipeButton.setPrefHeight(BUTTON_HEIGHT);
         generateRecipeButton.setStyle("-fx-background-color: #d8e6fa; -fx-border-color: BLACK");
 
-        generateShoppingListButton.setPrefWidth(BUTTON_WIDTH);
-        generateShoppingListButton.setPrefHeight(BUTTON_HEIGHT);
-        generateShoppingListButton.setStyle("-fx-background-color: #d3e6d2; -fx-border-color: BLACK");
-
         addRecipeButton.setPrefHeight(BUTTON_HEIGHT);
         addRecipeButton.setPrefWidth(BUTTON_WIDTH);
         addRecipeButton.setStyle("-fx-background-color: #dfd3e5; -fx-border-color: BLACK");
@@ -64,10 +59,9 @@ public class MainScene extends Scene {
         mainButtonSelectionHB.getChildren().add(addToStockButton);
         mainButtonSelectionHB.getChildren().add(removeFromStockButton);
         mainButtonSelectionHB.getChildren().add(generateRecipeButton);
-        mainButtonSelectionHB.getChildren().add(generateShoppingListButton);
         mainButtonSelectionHB.getChildren().add(addRecipeButton);
 
-        pane.add(mainButtonSelectionHB, 1,1);
+        pane.add(mainButtonSelectionHB, 0,1);
 
         addToStockButton.setOnAction(event->addToStock());
         removeFromStockButton.setOnAction(event-> removeScene());

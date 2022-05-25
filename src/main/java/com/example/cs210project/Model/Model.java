@@ -2,8 +2,12 @@ package com.example.cs210project.Model;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 
 import java.io.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Model {
 
@@ -21,18 +25,17 @@ public class Model {
 
     public static ObservableList<Food> populateStock() {
 
-        ObservableList<Food> StockList = FXCollections.observableArrayList();
+          ObservableList<Food> StockList = FXCollections.observableArrayList();
 
 
         if (fileHasData(STOCK_FILE)) {
-            try
-            {
+            try {
                 ObjectInputStream fileReader = new ObjectInputStream(new FileInputStream(STOCK_FILE));
                 Food[] temp = (Food[]) fileReader.readObject();
+
                 inStock.addAll(temp);
                 //fileReader.close();
-            }catch(IOException | ClassNotFoundException e)
-            {
+            } catch (IOException | ClassNotFoundException e) {
                 System.err.println("Error: " + e.getMessage());
             }
         }
@@ -40,6 +43,32 @@ public class Model {
         return inStock;
     }
 
+    public static Food[] checkForDupes(Food[] temp) {
+        ArrayList<Food> foodList = new ArrayList<>();
+        ArrayList<String> foodNames = new ArrayList<>();
+
+        int count =0;
+
+        for (Food f: inStock) {
+            foodNames.add(f.getName());
+
+        }
+
+       for (int i = 0; i < temp.length; i++) {
+           for (int j = 0; j < inStock.size(); j++) {
+               if (!(foodNames.contains((temp[i].getName())))) {
+                   foodList.add(temp[i]);
+               }
+           }
+
+       }
+       Food[] returnArray = new Food[foodList.size()];
+        for (int i = 0; i < returnArray.length; i++) {
+            returnArray[i] = foodList.get(i);
+
+        }
+       return returnArray;
+    }
 
     public static ObservableList<Recipe> populateRecipeList() {
         ObservableList<Recipe> allRecipes = FXCollections.observableArrayList();
@@ -56,8 +85,7 @@ public class Model {
         return allRecipes;
     }
 
-
-    public static boolean writeStockToBinaryFile(ObservableList<Food> stockList){
+    public static void writeStockToBinaryFile(ObservableList<Food> stockList) {
 
         try {
             ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream(STOCK_FILE));
@@ -68,14 +96,13 @@ public class Model {
             }
             fileWriter.writeObject(temp);
             fileWriter.close();
-            return true;
+
         } catch (IOException e) {
             System.err.println("Error writing: " + e.getMessage());
         }
-        return false;
     }
 
-    public static boolean writeRecipeToBinaryFile(ObservableList<Recipe> recipeList){
+    public static boolean writeRecipeToBinaryFile(ObservableList<Recipe> recipeList) {
 
         try {
             ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream(RECIPE_FILE));
@@ -94,27 +121,21 @@ public class Model {
     }
 
 
-    public static boolean writeToRecipe(ObservableList<Recipe> allRecipeList)
-    {
+    public static boolean writeToRecipe(ObservableList<Recipe> allRecipeList) {
         Recipe[] temp = new Recipe[allRecipeList.size()];
-        for(int i = 0; i < temp.length; i++)
-        {
+        for (int i = 0; i < temp.length; i++) {
             temp[i] = allRecipeList.get(i);
         }
-        try
-        {
+        try {
             ObjectOutputStream fileWriter = new ObjectOutputStream(new FileOutputStream(RECIPE_FILE));
             fileWriter.writeObject(temp);
             fileWriter.close();
             return true;
-        }catch(IOException e){
+        } catch (IOException e) {
             System.err.println("Error: " + e.getMessage());
         }
         return false;
     }
-
-
-
 
 
     //public static observableList<> populate recipe
