@@ -12,11 +12,7 @@ public class Controller {
     private static Controller theInstance;
     private ObservableList<Food> mStock;
     private ObservableList<Recipe> mAllRecipes;
-//    private ObservableList<Ingredient> mAllIngredients;
-//    private ObservableList<Produce> mAllProduce;
-//    private ObservableList<Meat> mAllMeat;
 
-   // private String fileName = "";
 
     private Controller(){}
 

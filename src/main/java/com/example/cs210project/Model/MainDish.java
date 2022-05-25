@@ -1,9 +1,10 @@
 package com.example.cs210project.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class MainDish extends Dish {
+public class MainDish extends Dish implements Serializable {
 
     private Meat meat; //chicken, beef, fish
 

@@ -1,8 +1,9 @@
 package com.example.cs210project.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SideDish extends Dish{
+public class SideDish extends Dish implements Serializable {
 
     private Produce mainIngredient;
 

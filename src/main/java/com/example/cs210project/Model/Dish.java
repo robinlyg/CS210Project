@@ -1,9 +1,10 @@
 package com.example.cs210project.Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public abstract class Dish {
+public abstract class Dish implements Serializable {
 
     protected String name;
     protected ArrayList<Ingredient> ingredients;
