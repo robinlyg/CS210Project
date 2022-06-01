@@ -45,14 +45,13 @@ public class AddRecipeScene extends Scene {
     private ArrayList<Produce> mProduceArrayList = new ArrayList<>();
     private ArrayList<Ingredient> mIngredientArrayList = new ArrayList<>();
     private boolean mainDish;
-    //TODO, not sure if we'll need or want
-    //private TextArea processTA = new TextArea();
 
     //mainMethod
     public AddRecipeScene(){
         super(new GridPane(), MainScene.WIDTH, MainScene.HEIGHT);
         GridPane pane = new GridPane();
 
+        //center scene contents
         RowConstraints row1 = new RowConstraints();
         row1.setPrefHeight(25);
         pane.getRowConstraints().add(row1);
@@ -61,13 +60,11 @@ public class AddRecipeScene extends Scene {
         pane.getColumnConstraints().add(colC);
         pane.setAlignment(Pos.CENTER);
 
-       // recipeList = controller.getAllRecipes();
-       // recipeLV.setItems(recipeList);
-
+        //VBox to store HBoxes
         VBox recipeVB = new VBox();
         recipeVB.setSpacing(15);
 
-        //recipe title and text field
+        //HBox for the recipe title
         HBox recipeTitleHB = new HBox();
         recipeTitleHB.setSpacing(15);
         recipeTitleHB.setPrefWidth(120);
@@ -90,7 +87,6 @@ public class AddRecipeScene extends Scene {
         prepHB.getChildren().add(new Label("Preparation"));
         prepHB.getChildren().add(prepCB);
         prepCB.getItems().addAll("Select","Baked", "Grilled", "Fried", "Boiled");
-       // prepCB.getSelectionModel().selectedItemProperty().addListener(((observableValue, s, newValue) -> selectedPrepType(newValue)));
         recipeVB.getChildren().add(prepHB);
 
         //Main ingredient combobox and label
@@ -100,9 +96,8 @@ public class AddRecipeScene extends Scene {
         mainIngredientHB.getChildren().add(mainIngredCB);
         mainIngredientHB.getChildren().add(sideIngredientTF);
         sideIngredientTF.setVisible(false);
-     //   mainIngredCB.getItems().addAll("Select", "Poultry", "Beef", "Pork", "Fish");
         recipeVB.getChildren().add(mainIngredientHB);
-        //depending on the selection here what we display is effected
+
 
         //meat label and combobox
         HBox meatHB = new HBox();
@@ -141,16 +136,12 @@ public class AddRecipeScene extends Scene {
 
         directionsTA.setPrefWidth(MainScene.WIDTH/2);
         directionsTA.setPrefHeight((MainScene.HEIGHT)/3.0);
-        // recipeLV.setPrefWidth(MainScene.WIDTH);
-        // recipeVB.getChildren().add(ingredientLabel);
+
         HBox directionHB = new HBox();
         directionHB.setSpacing(15);
         directionHB.getChildren().add(new Label("Directions"));
         directionHB.getChildren().add(directionsTA);
         recipeVB.getChildren().add(directionHB);
-
-       // recipeVB.getChildren().add(recipeLabel);
-       // recipeVB.getChildren().add(recipeLV);
 
         HBox buttonHB = new HBox();
         buttonHB.setSpacing(15);
@@ -169,6 +160,7 @@ public class AddRecipeScene extends Scene {
 
     }
 
+    //add an ingredient, get they type from CB, create new object and add, clear field
     private void addIngredient() {
         Ingredient obj = new Ingredient(ingredientCB.getSelectionModel().getSelectedItem(), ingredientTF.getText());
         mIngredientArrayList.add(obj);
@@ -176,7 +168,7 @@ public class AddRecipeScene extends Scene {
         ingredientCB.getSelectionModel().selectFirst();
         ingredientTF.clear();
     }
-
+    //add produce to produce arraylist, take user input from TF and create new object
     private void addProduce() {
         Produce obj = new Produce(produceCB.getSelectionModel().getSelectedItem(), produceTF.getText());
         mProduceArrayList.add(obj);
@@ -184,14 +176,14 @@ public class AddRecipeScene extends Scene {
         produceCB.getSelectionModel().selectFirst();
         produceTF.clear();
     }
-
+    //add meat to the meat arraylist, type determined by CB selection
     private void addMeat() {
         Meat obj = new Meat(meatCB.getSelectionModel().getSelectedItem());
         mMeatArrayList.add(obj);
 
         meatCB.getSelectionModel().selectFirst();
     }
-
+    //depending on the value selected in the dishCB, the observable list should be populated
     private void dishDisplay(String newValue) {
         ObservableList<String> mainIngredients = FXCollections.observableArrayList();
 
@@ -220,6 +212,7 @@ public class AddRecipeScene extends Scene {
     private void removeRecipe() {
     }
 
+    //add a recipe to the recipe list by pulling information from the user input fileds
     private void addRecipe() {
         String title, direction, prep;
         title = recipeTitleTF.getText();

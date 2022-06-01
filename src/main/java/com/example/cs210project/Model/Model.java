@@ -12,9 +12,7 @@ import java.util.ListIterator;
 public class Model {
 
     private static final File RECIPE_FILE = new File("RecipeList.dat");
-    private static final File MEAT_FILE = new File("MeatList.dat");
-    private static final File PRODUCE_FILE = new File("ProduceList.dat");
-    private static final File INGREDIENT_FILE = new File("IngredientList.dat");
+
     private static final File STOCK_FILE = new File("StockList.dat");
 
     protected static ObservableList<Food> inStock = FXCollections.observableArrayList();
@@ -26,7 +24,6 @@ public class Model {
     public static ObservableList<Food> populateStock() {
 
           ObservableList<Food> StockList = FXCollections.observableArrayList();
-
 
         if (fileHasData(STOCK_FILE)) {
             try {
@@ -41,33 +38,6 @@ public class Model {
         }
 
         return inStock;
-    }
-
-    public static Food[] checkForDupes(Food[] temp) {
-        ArrayList<Food> foodList = new ArrayList<>();
-        ArrayList<String> foodNames = new ArrayList<>();
-
-        int count =0;
-
-        for (Food f: inStock) {
-            foodNames.add(f.getName());
-
-        }
-
-       for (int i = 0; i < temp.length; i++) {
-           for (int j = 0; j < inStock.size(); j++) {
-               if (!(foodNames.contains((temp[i].getName())))) {
-                   foodList.add(temp[i]);
-               }
-           }
-
-       }
-       Food[] returnArray = new Food[foodList.size()];
-        for (int i = 0; i < returnArray.length; i++) {
-            returnArray[i] = foodList.get(i);
-
-        }
-       return returnArray;
     }
 
     public static ObservableList<Recipe> populateRecipeList() {
@@ -137,8 +107,4 @@ public class Model {
         return false;
     }
 
-
-    //public static observableList<> populate recipe
-
-    //public static bool write to
 }

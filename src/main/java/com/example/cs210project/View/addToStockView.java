@@ -26,9 +26,9 @@ public class addToStockView extends Scene {
     ObservableList<String> meatOptions = FXCollections.observableArrayList("Select Type", "Beef", "Pork", "Poultry", "Fish", "Shell Fish", "Exotic");
     ComboBox<String> meatCB = new ComboBox(meatOptions);
 
-    //TODO List for produce type for produceType CB
+    //List for produce type for produceType CB
     ObservableList<String> produceType = FXCollections.observableArrayList("Select Type", "Fruit", "Vegetable", "Herbs");
-    //TODO - "Type" should be the default
+    //"Type" should be the default
     private ComboBox<String> produceTypeCB = new ComboBox<>(produceType);
     private TextField produceTF = new TextField();
     private TextField dairyTF = new TextField();
@@ -41,13 +41,6 @@ public class addToStockView extends Scene {
     private Label seasonLabel = new Label("Seasoning");
     private Label pantryLabel = new Label("Pantry");
     private Label sauceLabel = new Label("Sauce");
-    private Label produceTypeErr = new Label(" This item has not been added");
-    private Label produceTypeRequiredErr = new Label("Type is required,");
-
-    private Produce selectedProduce;
-    private ObservableList<Produce> produceObservableList;
-    private ObservableList<Ingredient> ingredientsObservableList;
-    private ObservableList<Meat> meatObservableList;
 
     private Button addButton = new Button("Add");
     private Button returnButton = new Button("Return to Menu");
@@ -57,6 +50,7 @@ public class addToStockView extends Scene {
     public addToStockView() {
         super(new GridPane(), MainScene.WIDTH, MainScene.HEIGHT);
         GridPane pane = new GridPane();
+        //follow same format as in AddRecipeScene: center contents of sense, use a vbox to store sub HBox's
 
         RowConstraints row1 = new RowConstraints();
         row1.setPrefHeight(25);
@@ -66,17 +60,21 @@ public class addToStockView extends Scene {
         pane.getColumnConstraints().add(colC);
         pane.setAlignment(Pos.CENTER);
 
+        //main vBox
         VBox addToStockVB = new VBox();
         addToStockVB.setSpacing(30);
 
+        //meat Hbox
         HBox meatHB = new HBox();
         meatHB.setSpacing(75);
         meatLabel.setFont(new Font("Arial", FONT_SIZE));
         meatHB.getChildren().add(meatLabel);
         meatCB.getSelectionModel().selectFirst();
         meatHB.getChildren().add(meatCB);
+        //add to stock
         addToStockVB.getChildren().add(meatHB);
 
+        //produce HBox
         HBox produceHB = new HBox();
         produceHB.setSpacing(37);
         produceLabel.setFont(new Font("Arial", FONT_SIZE));
@@ -84,27 +82,34 @@ public class addToStockView extends Scene {
         produceHB.getChildren().add(produceTF);
         produceTypeCB.getSelectionModel().selectFirst();
         produceHB.getChildren().add(produceTypeCB);
+        //add to stock
         addToStockVB.getChildren().add(produceHB);
 
+        //dairy Hbox
         HBox dairyHB = new HBox();
         dairyHB.setSpacing(74);
         dairyLabel.setFont(new Font("Arial", FONT_SIZE));
         dairyHB.getChildren().add(dairyLabel);
         dairyHB.getChildren().add(dairyTF);
+        //add to stock
         addToStockVB.getChildren().add(dairyHB);
 
+        //HBox for seasoning
         HBox seasoningHB = new HBox();
         seasoningHB.setSpacing(15);
         seasonLabel.setFont(new Font("Arial", FONT_SIZE));
         seasoningHB.getChildren().add(seasonLabel);
         seasoningHB.getChildren().add(seasoningTF);
+        //add seasoning to stock
         addToStockVB.getChildren().add(seasoningHB);
 
+        //HBox for pantry items
         HBox pantryHB = new HBox();
         pantryHB.setSpacing(63);
         pantryLabel.setFont(new Font("Arial", FONT_SIZE));
         pantryHB.getChildren().add(pantryLabel);
         pantryHB.getChildren().add(pantryTF);
+        //add pantry item to stock
         addToStockVB.getChildren().add(pantryHB);
 
         HBox sauceHB = new HBox();
@@ -114,6 +119,7 @@ public class addToStockView extends Scene {
         sauceHB.getChildren().add(sauceTF);
         addToStockVB.getChildren().add(sauceHB);
 
+        //buttons: add and return need to call respective methods
         HBox buttonHB = new HBox();
         buttonHB.setSpacing(280);
         buttonHB.getChildren().add(addButton);
@@ -128,16 +134,17 @@ public class addToStockView extends Scene {
         this.setRoot(pane);
     }
 
-    //thinking user should be able to add from each field at once, or separately
+    // user should be able to add from each field at once, or separately
+    //for each child class, if fields are empty do not create an object,
+    //else: create an object of that type and add to the inStockList
+
     private void add() {
-        // produceTypeErr.setVisible(false);
-        //produceTypeRequiredErr.setVisible(false);
+
         String name, type;
 
         if (!(meatCB.getSelectionModel().getSelectedItem() == "Select Type")) {
             type = meatCB.getSelectionModel().getSelectedItem();
             Meat m = new Meat(type);
-            //check for dupes
                  controller.getAllInStock().add(m);
         }
         if (!(produceType.isEmpty())) {

@@ -37,6 +37,7 @@ public class MainScene extends Scene {
         pane.getColumnConstraints().add(colC);
         pane.setAlignment(Pos.CENTER);
 
+        //define main menu buttons
         addToStockButton.setPrefWidth(BUTTON_WIDTH);
         addToStockButton.setPrefHeight(BUTTON_HEIGHT);
         addToStockButton.setStyle("-fx-background-color: #fdf0ca; -fx-border-color: BLACK ");
@@ -53,6 +54,7 @@ public class MainScene extends Scene {
         addRecipeButton.setPrefWidth(BUTTON_WIDTH);
         addRecipeButton.setStyle("-fx-background-color: #dfd3e5; -fx-border-color: BLACK");
 
+        //add buttons to one VBox
         VBox mainButtonSelectionHB = new VBox();
         mainButtonSelectionHB.setSpacing(15);
         mainButtonSelectionHB.getChildren().add(title);
@@ -63,6 +65,7 @@ public class MainScene extends Scene {
 
         pane.add(mainButtonSelectionHB, 0,1);
 
+        //buttons need to call appropriate scene
         addToStockButton.setOnAction(event->addToStock());
         removeFromStockButton.setOnAction(event-> removeScene());
         addRecipeButton.setOnAction(event -> addRecipe());
@@ -71,7 +74,7 @@ public class MainScene extends Scene {
 
         this.setRoot(pane);
     }
-
+    //methods to call each scene
     private void addRecipe() {
         ViewNavigator.loadScene("Add Recipe", new AddRecipeScene());
     }

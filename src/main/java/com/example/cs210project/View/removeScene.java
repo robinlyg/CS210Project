@@ -39,6 +39,7 @@ public class removeScene extends Scene {
         removeVB.setSpacing(15);
         removeVB.getChildren().add(titleLabel);
 
+        //get the current selected item and pass to updateSelectedFood()
         mStockListView.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue,
                                                                                newValue) -> updateSelectedFood(newValue));
         mStockListView.setPrefWidth(MainScene.WIDTH);
@@ -64,11 +65,12 @@ public class removeScene extends Scene {
     private void returnToMain() {
         ViewNavigator.loadScene("Nothing To Eat", new MainScene());
     }
-
+    //set the selectedFood to the new value
     private void updateSelectedFood(Object newValue) {
         selectedFood = (Food) newValue;
     }
 
+    //use the selectedFood value, if not null, to call the remove(selectedFood)
     private void removeStockItem() {
 
         if (selectedFood == null)

@@ -38,6 +38,7 @@ public class generateRecipeScene extends Scene {
     public generateRecipeScene() {
 
         super(new GridPane(), MainScene.WIDTH, MainScene.HEIGHT);
+        //to keep consistent: center scene, use VBox with inner HBoxes
         GridPane pane = new GridPane();
 
         RowConstraints row1 = new RowConstraints();
