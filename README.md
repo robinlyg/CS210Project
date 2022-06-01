@@ -1,4 +1,4 @@
-# CS210Project - Nothing to Eat app
+# Nothing to Eat app
 
 The “Nothing to Eat” app, seeks to solve the “there’s nothing to eat in this house” sentiment. The goal was to auto-generate recipes to inspire users to use what’s 
 in stock to prepare a meal. The “Nothing to Eat” app, works by adding items to the stock list to represent what the user has on hand. By navigating to the 
