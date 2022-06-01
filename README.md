@@ -8,3 +8,6 @@ The App can also store recipes that it generates or the user enters. Not all rec
 *Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness.
 
 This project was created for a class project and will likely not be maintained. 
+
+# Requierments
+Project was writeen in Java 11, with dependencies Maven and Java FX. This project is not set up to be ran in Command Line, but should be cloned to an IDE. 
