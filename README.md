@@ -9,3 +9,9 @@ This project was created for a class project and will likely not be maintained.
 
 # Requirements
 The project was written in Java 11, with dependencies on Maven and Java FX. This project is not set up to be run in the command line but should be cloned to an IDE.
+
+#Run Instructions
+1.	Open a local IDE that supports Java 11
+2.	Create a new project from VCS
+3.	Clone the repository: https://github.com/robinlyg/CS210Project.git
+4.	Paste the clone address to the new project 
